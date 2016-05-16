@@ -1,0 +1,11 @@
+<%= bootstrap_form_for(@condominio) do |f| %>
+  <%= f.text_field :nome %>
+  <%= f.text_field :cnpj %>
+  <%= f.text_field :endereco %>
+  <%= f.text_field :cidade %>
+  <%= f.text_field :uf %>
+  <%= f.text_field :cep %>
+
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>
+
