@@ -1,9 +1,14 @@
-<%= bootstrap_form_for(@bloco) do |f| %>
-  <%= f.label :condominio_id %>
-  <%= f.collection_select :condominio_id, Condominio.all, :id, :nome, skip_label: true  %>
-  <%= f.text_field :descricao %>
-  <%= f.text_field :sigla %>
-  <%= f.text_field :obs %>
+<div class="box box-primary">
+  <div class="box-header with-border">
 
-  <%= f.submit 'Submit', class: 'btn btn-primary' %>
-<% end %>
+    <%= bootstrap_form_for(@bloco) do |f| %>
+      <%= f.label :condominio_id %>
+      <%= f.collection_select :condominio_id, Condominio.all, :id, :nome, skip_label: true  %>
+      <%= f.text_field :descricao %>
+      <%= f.text_field :sigla %>
+      <%= f.text_field :obs %>
+
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

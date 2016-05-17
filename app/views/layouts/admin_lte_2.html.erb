@@ -20,9 +20,9 @@
   <div class="wrapper">
 
     <%= render partial: 'layouts/admin_lte_2_header' %>
-
-    <%= render partial: 'layouts/admin_lte_2_sidebar' %>
-
+    <% if user_signed_in? %>
+      <%= render partial: 'layouts/admin_lte_2_sidebar' %>
+    <% end %>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -54,11 +54,11 @@
             <b><%= alert %></b>
           </div>
         <% end %>
-        <div class="box box-primary">
-          <div class="box-header with-border">
+        <!--div class="box box-primary">
+          <div class="box-header with-border"-->
             <%= yield %>
-          </div>
-        </div>
+          <!--/div>
+        </div-->
       </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
@@ -71,7 +71,7 @@
       <!-- Default to the left -->
       <strong>Copyright &copy; 2015 <%= link_to 'CenterClick Sistemas', root_path %>.</strong> All rights reserved.
     </footer>
-
+    <% if user_signed_in? %>
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
@@ -132,7 +132,7 @@
       </aside>
 
       <div class="control-sidebar-bg" style="position: fixed; height: auto;"></div>
-
+      <% end %>
   </div><!-- ./wrapper -->
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
