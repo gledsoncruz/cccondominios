@@ -1,12 +1,12 @@
 $(document).ready(function () {
 
 
-$(document).bind('ajaxError', 'form#new_bloco', function(event, jqxhr, settings, exception){
+$(document).bind('ajaxError', 'form#new_unidade', function(event, jqxhr, settings, exception){
     $(event.data).formErrors( $.parseJSON(jqxhr.responseText) );
 
 });
 
-$('form#new_bloco').submit(function(event) {
+$('form#new_unidade').submit(function(event) {
     event.preventDefault();
     var valuesToSubmit = $(this).serialize();
     console.log($(this).attr('action'));
@@ -19,7 +19,7 @@ $('form#new_bloco').submit(function(event) {
         type: "POST" // you want a difference between normal and ajax-calls, and json is standard
     }).success(function(json){
         //alert('form#'+form_id);
-        $('#blocoModal').modal('hide');
+        $('#unidadeModal').modal('hide');
         location.reload();
 
         //$('#msg').remove();

@@ -69,6 +69,6 @@ class UnidadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def unidade_params
-      params.require(:unidade).permit(:numero, :piso)
+      params.require(:unidade).permit(:numero, :piso, :bloco_id)
     end
 end
