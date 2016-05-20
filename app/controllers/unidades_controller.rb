@@ -1,5 +1,6 @@
 class UnidadesController < ApplicationController
   before_action :set_unidade, only: [:show, :edit, :update, :destroy]
+  before_action :set_condominio, only: [:edit]
 
   # GET /unidades
   # GET /unidades.json
@@ -10,6 +11,8 @@ class UnidadesController < ApplicationController
   # GET /unidades/1
   # GET /unidades/1.json
   def show
+    @unidade_pessoas = @unidade.unidade_pessoas.build
+    @pessoa = @unidade_pessoas.build_pessoa
   end
 
   # GET /unidades/new
@@ -67,8 +70,12 @@ class UnidadesController < ApplicationController
       @unidade = Unidade.find(params[:id])
     end
 
+    def set_condominio
+      @condominio = set_unidade.bloco.condominio
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def unidade_params
-      params.require(:unidade).permit(:numero, :piso, :bloco_id)
+      params.require(:unidade).permit(:numero, :piso, :bloco_id, unidade_pessoas_attributes: [:unidade_id, :pessoa_id])
     end
 end

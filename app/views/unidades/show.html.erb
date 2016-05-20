@@ -1,14 +1,83 @@
-<p id="notice"><%= notice %></p>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <div class="row">
+      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <h2><%= @unidade.bloco.descricao %> (Apto. <%= @unidade.numero %> - <%= @unidade.piso %>)</h2>
+      </div>
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <div class=" pull-right">
+          <%= link_to 'Excluir', @unidade, class: 'btn btn-danger' %>
+          <%= link_to 'Alterar', edit_unidade_path(@unidade), class: 'btn btn-primary' %>
+          <%= link_to 'Blocos', condominio_path(@unidade.bloco.condominio), class: 'btn btn-primary' %>
+          <button type="button" class="btn btn-primary" id="MostrarForm">Adicionar Pessoa</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table class="table table-bordered table-hover">
 
-<p>
-  <strong>Numero:</strong>
-  <%= @unidade.numero %>
-</p>
+          <tr>
+            <td style="width:10%"><strong>Numero:</strong></td>
+            <td style="width:90%"><%= @unidade.numero %></td>
+          </tr>
+          <tr>
+            <td><strong>Piso:</strong></td>
+            <td><%= @unidade.piso %></td>
+          </tr>
 
-<p>
-  <strong>Piso:</strong>
-  <%= @unidade.piso %>
-</p>
+        </table>
 
-<%= link_to 'Edit', edit_unidade_path(@unidade) %> |
-<%= link_to 'Back', unidades_path %>
+
+      </div>
+    </div>
+
+    <div class="box box-primary" id="frm_pessoa" style="display:none">
+      <div class="box-header with-border">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h2>Pessoas</h2>
+              <%= bootstrap_form_for(@pessoa) do |f| %>
+                <%= f.text_field :nome %>
+                <%= f.text_field :cpf %>
+                <%= f.date_field :dta_nasc %>
+                <%= f.text_field :sexo %>
+                <%= f.text_field :tipo %>
+                <%= f.hidden_field :unidade_id, value: @unidade.id %>
+                <%= f.submit 'Submit', class: 'btn btn-primary' %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('.attributes.nome')%></th>
+          <th><%= t('.attributes.cpf')%></th>
+          <th><%= t('.attributes.dta_nasc')%></th>
+          <th><%= t('.attributes.sexo')%></th>
+          <th colspan="3" style="text-align: center;"><%= t('.attributes.actions')%></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @unidade.pessoas.each do |pessoa| %>
+          <tr>
+            <td><%= pessoa.nome %></td>
+            <td><%= pessoa.cpf %></td>
+            <td><%= pessoa.dta_nasc %></td>
+            <td><%= pessoa.sexo %></td>
+            <td style="text-align: center;"><%= link_to '', pessoa, :class => 'glyphicon glyphicon-search', :title => 'View' %></td>
+            <td style="text-align: center;"><%= link_to '', edit_pessoa_path(pessoa), :class => 'glyphicon glyphicon-pencil', :title => 'Edit'  %></td>
+            <td style="text-align: center;">
+                <%= link_to '', pessoa, :class => 'glyphicon glyphicon-trash', :method => :delete, :data => { :confirm => 'Are you sure?' }, :title => 'Apagar' %>
+            </td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

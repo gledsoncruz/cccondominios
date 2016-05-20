@@ -1,25 +1,13 @@
-<%= form_for(@unidade) do |f| %>
-  <% if @unidade.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@unidade.errors.count, "error") %> prohibited this unidade from being saved:</h2>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3><%= @condominio.nome %></h3>
+    <%= bootstrap_form_for(@unidade) do |f| %>
+      <%= f.label :bloco_id %>
+      <%= f.collection_select :bloco_id, @condominio.blocos.reverse_each, :id, :descricao, skip_label: true  %>
+      <%= f.text_field :numero %>
+      <%= f.text_field :piso %>
 
-      <ul>
-      <% @unidade.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :numero %><br>
-    <%= f.text_field :numero %>
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :piso %><br>
-    <%= f.text_field :piso %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516193635) do
+ActiveRecord::Schema.define(version: 20160519140106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,31 @@ ActiveRecord::Schema.define(version: 20160516193635) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "pessoas", force: :cascade do |t|
+    t.string   "cpf",          limit: 15
+    t.string   "cnpj",         limit: 15
+    t.string   "nome",         limit: 80, null: false
+    t.date     "dta_nasc",                null: false
+    t.string   "sexo",                    null: false
+    t.string   "email",        limit: 40
+    t.string   "cel",          limit: 15
+    t.string   "tel",          limit: 15
+    t.boolean  "proprietario"
+    t.string   "tipo",         limit: 20, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "unidade_pessoas", id: false, force: :cascade do |t|
+    t.integer  "unidade_id", null: false
+    t.integer  "pessoa_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "unidade_pessoas", ["pessoa_id"], name: "index_unidade_pessoas_on_pessoa_id", using: :btree
+  add_index "unidade_pessoas", ["unidade_id"], name: "index_unidade_pessoas_on_unidade_id", using: :btree
 
   create_table "unidades", force: :cascade do |t|
     t.integer  "bloco_id"
@@ -68,5 +93,7 @@ ActiveRecord::Schema.define(version: 20160516193635) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "blocos", "condominios"
+  add_foreign_key "unidade_pessoas", "pessoas"
+  add_foreign_key "unidade_pessoas", "unidades"
   add_foreign_key "unidades", "blocos"
 end
