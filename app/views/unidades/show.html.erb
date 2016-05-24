@@ -8,7 +8,7 @@
         <div class=" pull-right">
           <%= link_to 'Excluir', @unidade, class: 'btn btn-danger' %>
           <%= link_to 'Alterar', edit_unidade_path(@unidade), class: 'btn btn-primary' %>
-          <%= link_to 'Blocos', condominio_path(@unidade.bloco.condominio), class: 'btn btn-primary' %>
+          <%= link_to 'Blocos', bloco_path(@unidade.bloco), class: 'btn btn-primary' %>
           <button type="button" class="btn btn-primary" id="MostrarForm">Adicionar Pessoa</button>
         </div>
       </div>
@@ -27,8 +27,6 @@
           </tr>
 
         </table>
-
-
       </div>
     </div>
 
@@ -40,9 +38,14 @@
               <%= bootstrap_form_for(@pessoa) do |f| %>
                 <%= f.text_field :nome %>
                 <%= f.text_field :cpf %>
-                <%= f.date_field :dta_nasc %>
+                <%= f.email_field :email %>
+                <%= f.date_select :dta_nasc, :start_year=>1930,:end_year=>Time.now.year %>
                 <%= f.text_field :sexo %>
                 <%= f.text_field :tipo %>
+                <%= f.phone_field :cel %>
+                <%= f.phone_field :tel %>
+                <%= f.check_box :proprietario %>
+                <%= f.check_box :morador %>
                 <%= f.hidden_field :unidade_id, value: @unidade.id %>
                 <%= f.submit 'Submit', class: 'btn btn-primary' %>
               <% end %>
@@ -68,6 +71,15 @@
             <td><%= pessoa.cpf %></td>
             <td><%= pessoa.dta_nasc %></td>
             <td><%= pessoa.sexo %></td>
+            <td>
+              <%if pessoa.proprietario? %>
+                <span class="label label-success">Proprietario</span>
+              <% end %>
+              <% if pessoa.morador? %>
+                <span class="label label-warning">Morador</span>
+              <% end %>
+
+            </td>
             <td style="text-align: center;"><%= link_to '', pessoa, :class => 'glyphicon glyphicon-search', :title => 'View' %></td>
             <td style="text-align: center;"><%= link_to '', edit_pessoa_path(pessoa), :class => 'glyphicon glyphicon-pencil', :title => 'Edit'  %></td>
             <td style="text-align: center;">
