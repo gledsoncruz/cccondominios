@@ -17,4 +17,5 @@
 //= require jquery_nested_form
 //= require app
 //= require_tree .
+//= require filterrific/filterrific-jquery
 

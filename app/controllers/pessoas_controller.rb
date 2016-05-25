@@ -4,7 +4,17 @@ class PessoasController < ApplicationController
   # GET /pessoas
   # GET /pessoas.json
   def index
-    @pessoas = Pessoa.all
+    #@pessoas = Pessoa.all
+    @filterrific = initialize_filterrific(
+    Pessoa,
+    params[:filterrific]
+    ) or return
+    @pessoas = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /pessoas/1

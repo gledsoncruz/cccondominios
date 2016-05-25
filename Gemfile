@@ -18,6 +18,8 @@ gem 'bootstrap_form'
 gem 'font-awesome-rails'
 gem 'ionicons-rails'
 gem 'nested_form'
+gem 'filterrific'
+gem 'will_paginate-bootstrap'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

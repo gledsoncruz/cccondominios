@@ -1,0 +1,33 @@
+
+
+<div id="filterrific_results">
+  <div class="well">
+    <%= page_entries_info pessoas %>
+    <%= render_filterrific_spinner %>
+    <div class="pull-right">
+      <%= link_to('Limpar Filtros', reset_filterrific_url, class: 'btn btn-primary btn-xs') %>
+    </div>
+  </div>
+
+  <table class="table table-hover">
+    <tr>
+      <th><%= filterrific_sorting_link(@filterrific, :nome) %></th>
+      <th><%= filterrific_sorting_link(@filterrific, :email) %></th>
+      <th>CPF</th>
+      <th>CEL</th>
+      <th>Proprietario</th>
+      <th>Dta Nasc</th>
+    </tr>
+    <% pessoas.each do |pessoa| %>
+      <tr>
+        <td><%= pessoa.nome %></td>
+        <td><%= pessoa.email %></td>
+        <td><%= pessoa.cpf %></td>
+        <td><%= pessoa.cel %></td>
+        <td><%= pessoa.proprietario %></td>
+        <td><%= pessoa.dta_nasc %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate pessoas, renderer: BootstrapPagination::Rails %>
+</div>
