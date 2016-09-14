@@ -13,19 +13,21 @@
     <tr>
       <th><%= filterrific_sorting_link(@filterrific, :nome) %></th>
       <th><%= filterrific_sorting_link(@filterrific, :email) %></th>
-      <th>CPF</th>
+      <th>Condominio</th>
+      <th>Bloco</th>
+      <th>Unidade</th>
       <th>CEL</th>
       <th>Proprietario</th>
-      <th>Dta Nasc</th>
     </tr>
     <% pessoas.each do |pessoa| %>
       <tr>
         <td><%= pessoa.nome %></td>
         <td><%= pessoa.email %></td>
-        <td><%= pessoa.cpf %></td>
+        <td><%= pessoa.unidades[0].bloco.condominio.nome %></td>
+        <td><%= pessoa.unidades[0].bloco.descricao %></td>
+        <td><%= pessoa.unidades[0].numero %></td>
         <td><%= pessoa.cel %></td>
         <td><%= pessoa.proprietario %></td>
-        <td><%= pessoa.dta_nasc %></td>
       </tr>
     <% end %>
   </table>
